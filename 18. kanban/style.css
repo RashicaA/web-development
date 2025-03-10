@@ -8,6 +8,7 @@ body {
     padding: 0;
 }
 
+/* toolbox */
 .toolbox-cont {
     height: 5rem;
     background-color: #4b4b4b;
@@ -76,4 +77,83 @@ body {
 .remove-btn:hover {
     background-color: #4bb543;
     transition: .2s ease-in;
+}
+
+/* ticket area */
+
+.main-cont {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.ticket-cont {
+    height: 12rem;
+    width: 15rem;
+    background-color: coral;
+}
+
+.ticket-color {
+    height: 1rem;
+    background-color: lightgreen;
+}
+
+.ticket-id {
+    background-color: yellow;
+    height: 2rem;
+}
+
+.task-area {}
+
+.ticket-lock {
+    /* can use position:absolute */
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 90px;
+    margin-right: 5px;
+    font-size: 1.5rem;
+
+}
+
+.modal-cont {
+    height: 50vh;
+    width: 45vw;
+    display: flex;
+    background-color: salmon;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+}
+
+.textArea-cont {
+    background-color: grey;
+    height: 100%;
+    width: 75%;
+    resize: none;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 2rem
+}
+
+.priority-colors-container {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    background: #4b4b4b;
+    align-items: center;
+    /* justify-content: space-around; */
+}
+
+.priority-color {
+    height: 3rem;
+    margin-bottom: 20px;
+    width: 5rem
+}
+
+.active {
+    border: 5px solid salmon
 }
