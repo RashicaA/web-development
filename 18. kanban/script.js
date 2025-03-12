@@ -3,9 +3,13 @@ const modalCont = document.querySelector('.modal-cont');
 const mainCont = document.querySelector('.main-cont')
 const textArea = document.querySelector('.textArea-cont');
 const allPriorityColors = document.querySelectorAll('.priority-color')
+const removeBtn = document.querySelector('.remove-btn');
+const allTickets = document.querySelectorAll('.ticket-cont')
 
 // show modal flag.
 let addTaskFlag = false;
+
+let removeTaskFlag = false;
 
 addBtn.addEventListener('click', function () {
     // toggle the flag. true > false ELSE false > true
@@ -18,31 +22,46 @@ addBtn.addEventListener('click', function () {
     }
 })
 
-function createTicket() {
+removeBtn.addEventListener('click', function () {
+    removeTaskFlag = !removeTaskFlag;
+    if (removeTaskFlag) {
+        alert('Delete mode activated...')
+        removeBtn.style.color = 'red'
+    } else {
+        removeBtn.style.color = 'white'
+    }
+})
+
+function createTicket(ticketColor, ticketTask, ticketId) {
     // create a new ticket container element...
     const ticketCont = document.createElement('div');
 
     ticketCont.classList.add('ticket-cont');
     // ticketCont.setAttribute('class', 'ticket-cont');
 
+
     ticketCont.innerHTML = `
-    <div class="ticket-color"></div>
-            <div class="ticket-id">123456</div>
-            <div class="task-area">Random task</div>
+    <div class="ticket-color" style="background-color: ${ticketColor}"></div>
+            <div class="ticket-id">${ticketId}</div>
+            <div class="task-area">${ticketTask}</div>
             <div class="ticket-lock">
                 <i class="fa-solid fa-lock"></i>
             </div>
     `
     mainCont.appendChild(ticketCont);
-
+    handleRemoval(ticketCont);
 }
-
 
 // attaching event to save/call create tciket function.
 textArea.addEventListener('keydown', function (ev) {
     const key = ev.key;
     if (key === 'Shift') {
-        createTicket();
+        const taskContent = textArea.value;
+        // const ticketId = Math.random().toString(36).substring(2, 8)
+        const ticketId = shortid();
+
+
+        createTicket(modalPriorityColor, taskContent, ticketId);
         modalCont.style.display = "none";
         textArea.value = '';
     }
@@ -65,4 +84,16 @@ allPriorityColors.forEach(function (colorElem) {
 
 
     })
+})
+
+function handleRemoval(ticketElem) {
+    ticketElem.addEventListener('click', function () {
+        if (removeTaskFlag) {
+            ticketElem.remove();
+        }
+    })
+}
+
+allTickets.forEach(function (ticket) {
+    handleRemoval(ticket)
 })
