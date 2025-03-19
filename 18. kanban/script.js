@@ -13,6 +13,8 @@ console.log("ticketLockIcon", ticketLockIcon);
 
 const ticketTaskArea = document.querySelector('.task-area');
 
+const toolBoxColors = document.querySelectorAll('.color');
+
 // show modal flag.
 let addTaskFlag = false;
 
@@ -146,3 +148,33 @@ function handleColor(ticketElem) {
 
     })
 }
+
+toolBoxColors.forEach(function (colorElem) {
+    colorElem.addEventListener('click', function () {
+        const selectedColor = colorElem.classList[0];
+        console.log({ selectedColor })
+        const allTickets = document.querySelectorAll('.ticket-cont');
+        console.log(allTickets)
+        allTickets.forEach(function (ticketElem) {
+            const ticketColorBand = ticketElem.querySelector(".ticket-color");
+            if (ticketColorBand.style.backgroundColor === selectedColor) {
+                // its a match
+                ticketElem.style.display = 'block'
+            } else {
+                ticketElem.style.display = 'none'
+            }
+        })
+
+    })
+
+    // TO RESET THE FILTER, USER WILL DOUBLE CLICK
+
+    colorElem.addEventListener('dblclick', function () {
+        const allTickets = document.querySelectorAll('.ticket-cont');
+        allTickets.forEach(function (ticketElem) {
+            ticketElem.style.display = 'block';
+        })
+
+    })
+
+})
