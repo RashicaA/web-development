@@ -4,12 +4,38 @@ const mainCont = document.querySelector('.main-cont')
 const textArea = document.querySelector('.textArea-cont');
 const allPriorityColors = document.querySelectorAll('.priority-color')
 const removeBtn = document.querySelector('.remove-btn');
-const allTickets = document.querySelectorAll('.ticket-cont')
+const allTickets = document.querySelectorAll('.ticket-cont');
+
+const ticketLockElem = document.querySelector('.ticket-lock');
+const ticketLockIcon = ticketLockElem.children[0];
+console.log("ticketLockElem", ticketLockElem);
+console.log("ticketLockIcon", ticketLockIcon);
+
+const ticketTaskArea = document.querySelector('.task-area');
 
 // show modal flag.
 let addTaskFlag = false;
 
 let removeTaskFlag = false;
+
+// lock flags
+const lockClose = 'fa-lock';
+const lockOpen = 'fa-lock-open';
+
+ticketLockIcon.addEventListener('click', function () {
+    if (ticketLockIcon.classList.contains(lockClose)) {
+        // right now, lock is there.
+        // remove lock, show unlock.
+        ticketLockIcon.classList.remove(lockClose);
+        ticketLockIcon.classList.add(lockOpen);
+        ticketTaskArea.setAttribute('contenteditable', 'true');
+    } else {
+        ticketLockIcon.classList.add(lockClose)
+        ticketLockIcon.classList.remove(lockOpen)
+        ticketTaskArea.setAttribute('contenteditable', 'false');
+    }
+})
+
 
 addBtn.addEventListener('click', function () {
     // toggle the flag. true > false ELSE false > true
@@ -45,7 +71,7 @@ function createTicket(ticketColor, ticketTask, ticketId) {
             <div class="ticket-id">${ticketId}</div>
             <div class="task-area">${ticketTask}</div>
             <div class="ticket-lock">
-                <i class="fa-solid fa-lock"></i>
+                <i class="fa-solid fa-lock-open"></i>
             </div>
     `
     mainCont.appendChild(ticketCont);
@@ -97,3 +123,4 @@ function handleRemoval(ticketElem) {
 allTickets.forEach(function (ticket) {
     handleRemoval(ticket)
 })
+
