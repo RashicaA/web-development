@@ -36,7 +36,6 @@ ticketLockIcon.addEventListener('click', function () {
     }
 })
 
-
 addBtn.addEventListener('click', function () {
     // toggle the flag. true > false ELSE false > true
     addTaskFlag = !addTaskFlag;
@@ -76,6 +75,7 @@ function createTicket(ticketColor, ticketTask, ticketId) {
     `
     mainCont.appendChild(ticketCont);
     handleRemoval(ticketCont);
+    handleColor(ticketCont);
 }
 
 // attaching event to save/call create tciket function.
@@ -124,3 +124,25 @@ allTickets.forEach(function (ticket) {
     handleRemoval(ticket)
 })
 
+
+const colors = ['lightpink', 'lightgreen', 'lightblue', 'black']
+
+function handleColor(ticketElem) {
+    const ticketColorBand = ticketElem.querySelector('.ticket-color');
+    ticketColorBand.addEventListener('click', function () {
+        const currentColor = ticketColorBand.style.backgroundColor;
+        console.log(currentColor)
+
+        let currentColorIndexInColorsArray = colors.findIndex(function (col) {
+            return currentColor === col;
+        })
+
+        currentColorIndexInColorsArray++;
+
+        const newTicketColorIndex = currentColorIndexInColorsArray % colors.length;
+        const newTicketColor = colors[newTicketColorIndex];
+
+        ticketColorBand.style.backgroundColor = newTicketColor;
+
+    })
+}
