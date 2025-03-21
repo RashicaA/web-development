@@ -24,6 +24,40 @@ let removeTaskFlag = false;
 const lockClose = 'fa-lock';
 const lockOpen = 'fa-lock-open';
 
+// LS implementation
+
+const ticketsArr = JSON.parse(localStorage.getItem('tickets')) || [];
+console.log(ticketsArr);
+
+// for every reload.. fetch from LS. ( in starting )
+// RETRIEVAL FROM LS FLOW..
+function init() {
+    // i will see data from LS
+    // if something is presnet, i will call createTicket(...) and that function will render my UI.
+
+    if (localStorage.getItem("tickets")) {
+        ticketsArr.forEach(function (ticket) {
+            createTicket(ticket.ticketColor, ticket.taskContent, ticket.ticketId)
+        })
+    }
+}
+
+init();
+
+function updateLocalStorage() {
+    // to set the LS from your local array.
+    localStorage.setItem("tickets", JSON.stringify(ticketsArr));
+}
+
+function getTicketArrIndex(id) {
+    // give me indeex from array which is getting affected.
+    let foundIdx = ticketsArr.findIndex(function (tkt) {
+        return id === tkt.ticketId
+    })
+    return foundIdx;
+}
+
+
 ticketLockIcon.addEventListener('click', function () {
     if (ticketLockIcon.classList.contains(lockClose)) {
         // right now, lock is there.
@@ -72,7 +106,7 @@ function createTicket(ticketColor, ticketTask, ticketId) {
             <div class="ticket-id">${ticketId}</div>
             <div class="task-area">${ticketTask}</div>
             <div class="ticket-lock">
-                <i class="fa-solid fa-lock-open"></i>
+                <i class="fa-solid fa-lock"></i>
             </div>
     `
     mainCont.appendChild(ticketCont);
@@ -90,6 +124,10 @@ textArea.addEventListener('keydown', function (ev) {
 
 
         createTicket(modalPriorityColor, taskContent, ticketId);
+        // USING LS IN CREATE FLOW..
+        ticketsArr.push({ ticketId, taskContent, ticketColor: modalPriorityColor })
+        updateLocalStorage();
+
         modalCont.style.display = "none";
         textArea.value = '';
     }
@@ -115,9 +153,16 @@ allPriorityColors.forEach(function (colorElem) {
 })
 
 function handleRemoval(ticketElem) {
+    const idElem = ticketElem.querySelector(".ticket-id");
+    const id = idElem.innerText;
+
     ticketElem.addEventListener('click', function () {
         if (removeTaskFlag) {
             ticketElem.remove();
+            // update LS also...
+            const tktIdx = getTicketArrIndex(id);
+            ticketsArr.splice(tktIdx, 1);
+            updateLocalStorage()
         }
     })
 }
@@ -131,7 +176,13 @@ const colors = ['lightpink', 'lightgreen', 'lightblue', 'black']
 
 function handleColor(ticketElem) {
     const ticketColorBand = ticketElem.querySelector('.ticket-color');
+    const idElem = ticketElem.querySelector('.ticket-id')
+
+
     ticketColorBand.addEventListener('click', function () {
+
+        const ticketIdx = getTicketArrIndex(idElem.innerText);
+
         const currentColor = ticketColorBand.style.backgroundColor;
         console.log(currentColor)
 
@@ -145,6 +196,9 @@ function handleColor(ticketElem) {
         const newTicketColor = colors[newTicketColorIndex];
 
         ticketColorBand.style.backgroundColor = newTicketColor;
+
+        ticketsArr[ticketIdx].ticketColor = newTicketColor;
+        updateLocalStorage()
 
     })
 }
