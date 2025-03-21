@@ -6,12 +6,6 @@ const allPriorityColors = document.querySelectorAll('.priority-color')
 const removeBtn = document.querySelector('.remove-btn');
 const allTickets = document.querySelectorAll('.ticket-cont');
 
-const ticketLockElem = document.querySelector('.ticket-lock');
-const ticketLockIcon = ticketLockElem.children[0];
-console.log("ticketLockElem", ticketLockElem);
-console.log("ticketLockIcon", ticketLockIcon);
-
-const ticketTaskArea = document.querySelector('.task-area');
 
 const toolBoxColors = document.querySelectorAll('.color');
 
@@ -58,19 +52,40 @@ function getTicketArrIndex(id) {
 }
 
 
-ticketLockIcon.addEventListener('click', function () {
-    if (ticketLockIcon.classList.contains(lockClose)) {
-        // right now, lock is there.
-        // remove lock, show unlock.
-        ticketLockIcon.classList.remove(lockClose);
-        ticketLockIcon.classList.add(lockOpen);
-        ticketTaskArea.setAttribute('contenteditable', 'true');
-    } else {
-        ticketLockIcon.classList.add(lockClose)
-        ticketLockIcon.classList.remove(lockOpen)
-        ticketTaskArea.setAttribute('contenteditable', 'false');
-    }
-})
+
+
+function handleLock(ticketElem) {
+    const ticketLockElem = ticketElem.querySelector('.ticket-lock');
+    const ticketLockIcon = ticketLockElem.children[0];
+    console.log("ticketLockElem", ticketLockElem);
+    console.log("ticketLockIcon", ticketLockIcon);
+    const ticketTaskArea = ticketElem.querySelector('.task-area');
+
+
+    const idElem = ticketElem.querySelector(".ticket-id");
+    const id = idElem.innerText;
+
+    ticketLockIcon.addEventListener('click', function () {
+        const idx = getTicketArrIndex(id);
+
+        if (ticketLockIcon.classList.contains(lockClose)) {
+            // right now, lock is there.
+            // remove lock, show unlock.
+            ticketLockIcon.classList.remove(lockClose);
+            ticketLockIcon.classList.add(lockOpen);
+            ticketTaskArea.setAttribute('contenteditable', 'true');
+        } else {
+            ticketLockIcon.classList.add(lockClose)
+            ticketLockIcon.classList.remove(lockOpen)
+            ticketTaskArea.setAttribute('contenteditable', 'false');
+        }
+
+        ticketsArr[idx].taskContent = ticketTaskArea.innerText;
+        updateLocalStorage();
+    })
+
+
+}
 
 addBtn.addEventListener('click', function () {
     // toggle the flag. true > false ELSE false > true
@@ -112,6 +127,7 @@ function createTicket(ticketColor, ticketTask, ticketId) {
     mainCont.appendChild(ticketCont);
     handleRemoval(ticketCont);
     handleColor(ticketCont);
+    handleLock(ticketCont)
 }
 
 // attaching event to save/call create tciket function.
