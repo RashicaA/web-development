@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #cacaca
+        }
+    </style>
+</head>
+
+<body>
+    <div id="colorPallette">
+        <div class="color-box" style="background-color: orange; width: 100px; height: 100px; border: solid 2px #000">
+        </div>
+        <div class="color-box"
+            style="background-color: lightgreen; width: 100px; height: 100px; border: solid 2px #000"></div>
+        <div class="color-box" style="background-color: cyan; width: 100px; height: 100px; border: solid 2px #000">
+        </div>
+        <div style="background-color: bisque;">i should not change color.......</div>
+    </div>
+</body>
+<script>
+    // unoptimised way.
+    /**
+     * 
+        const colorBoxes = document.querySelectorAll(".color-box");
+        colorBoxes.forEach((function (elem) {
+            elem.addEventListener("click", function () {
+                const currentColor = elem.style.backgroundColor;
+                document.body.style.backgroundColor = currentColor;
+            })
+        }))
+    
+        */
+
+    // optimised way
+    const colorPallette = document.getElementById("colorPallette");
+    colorPallette.addEventListener('click', function (event) {
+        const clickedElem = event.target;
+        if (clickedElem.classList.contains("color-box")) {
+            const currentColor = clickedElem.style.backgroundColor;
+            document.body.style.backgroundColor = currentColor;
+            console.log(currentColor)
+        }
+    })
+
+</script>
+
+</html>
