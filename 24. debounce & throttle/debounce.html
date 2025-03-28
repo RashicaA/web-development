@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input_field" type="text" placeholder="Search...">
+    <script>
+        const input = document.getElementById("input_field");
+
+        function processInput() {
+            console.log("[process inut called]user typing...")
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            console.log("[debounce] called with timeout = ", timeout);
+            return function () {
+                const later = function () {
+                    console.log("[later] called")
+                    clearTimeout(timeout)
+                    func();
+                }
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                console.log("[outer func called]")
+            }
+        }
+
+        const debouncedInput = debounce(processInput, 300);
+        input.addEventListener('keydown', debouncedInput);
+    </script>
+</body>
+
+</html>
