@@ -9,7 +9,7 @@ class Pizza1 {
         Pizza1.totalPizzasMade++;
 
     }
-    describeOrder = function () {
+    describeOrder() {
         console.log(`A ${this.crustType} ${this.size} size pizza is ready with ${this.toppings}`)
     }
     hello() {
