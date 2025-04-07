@@ -43,3 +43,30 @@ let car2 = new Car("Tata Nexon", 2022);
 // console.log(car1.displayGenericInfo());
 // console.log(car2.displayGenericInfo());
 // console.log(car1)
+
+
+// using Object.create()
+
+let carPrototype = {
+    showInfo: function () {
+        return `This is a ${this.year} ${this.model}`
+    }
+};
+
+let car3 = Object.create(carPrototype);
+car3.model = "Honda City"
+car3.year = 2020;
+
+let car4 = Object.create(carPrototype);
+car4.model = 'Maruti Suzuki Baleno';
+car4.year = 2018;
+
+
+console.log(car3.showInfo())
+console.log(car4.showInfo())
+console.log("car3", car3)
+
+let obj = Object.create(carPrototype)
+
+console.log("obj", obj)
+console.log("obj", obj.showInfo())
