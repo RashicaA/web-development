@@ -35,6 +35,14 @@ console.log(r2)
 console.log(r2.length)
 // console.log(r4)
 
+const thisArgument = { multiplier: 100 };
+
+const answer = [1, 2, 3, 4, 5].myMapMethod(function (el) {
+    return el * this.multiplier
+}, thisArgument)
+
+console.log({ answer })
+
 
 
 
