@@ -32,3 +32,18 @@ Promise.all([fetchUserData(), fetchUserPosts(), fetchUserHobbies()])
     .catch(e => {
         console.log("Ann error occurred: ", e); //Ann error occurred:  NO hobbies!
     })
+
+
+
+
+// async await
+
+
+// async function getPrice() {
+//     const result = await Promise.all([
+//         priceForTv(),
+//         priceForMobile(),
+//     ]);
+
+//     console.log(result)
+// }
