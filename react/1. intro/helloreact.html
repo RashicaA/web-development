@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- cdn links -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script>
+        const root = document.getElementById("root");
+
+        // createElement takes three things
+        // 1. type of element
+        // 2. properties of the element. ( later ) ; null means no properties.
+        // 3. children of this element. ( text node )
+        const headingElem = React.createElement('h1', {
+            style: {
+                color: 'red',
+                backgroundColor: "green",
+                border: 'solid 2px yellow'
+            }
+        }, 'Hello World from React!');
+
+        // ReactDOM is repsonsible for interacton b/w React & UI(browser)
+        // render(element, container) <-- syntax
+        ReactDOM.render(headingElem, root)
+    </script>
+
+
+
+
+
+</body>
+
+</html>
