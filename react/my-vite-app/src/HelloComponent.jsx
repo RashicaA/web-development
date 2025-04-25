@@ -1,7 +1,11 @@
 import React from 'react';
 
-const HelloComponent = () => {
-    return <h1>Hello, my name is John.</h1>
+const HelloComponent = ({ name, age }) => {
+
+    return <>
+        <div>Hello, my name is {name}</div>
+        {age ? <span>and {age} years old.</span> : null}
+    </>
 }
 
 export default HelloComponent;
