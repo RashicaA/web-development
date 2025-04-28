@@ -7,9 +7,10 @@ import DisplayData from './DisplayData'
 import Button from './Button'
 
 import Counter from './Counter'
+import Usercard from './User/UserCard';
+import userObj from './User/user'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   const fruits = ['apple', 'orange', 'melon'];
   const person = {
@@ -17,7 +18,7 @@ function App() {
     age: 40
   }
 
-
+  console.log(userObj)
   return (
     <>
       <div>
@@ -32,7 +33,7 @@ function App() {
       <Button />
 
       <Counter />
-
+      <Usercard user={userObj} />
     </>
   )
 }
