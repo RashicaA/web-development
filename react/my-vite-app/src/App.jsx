@@ -10,6 +10,10 @@ import Counter from './Counter'
 import Usercard from './User/UserCard';
 import userObj from './User/user'
 
+import ProductList from './ProductList/Product'
+import products from './ProductList/products'
+
+
 function App() {
 
   const fruits = ['apple', 'orange', 'melon'];
@@ -34,6 +38,8 @@ function App() {
 
       <Counter />
       <Usercard user={userObj} />
+
+      <ProductList products={products} />
     </>
   )
 }
