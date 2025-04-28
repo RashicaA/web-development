@@ -13,6 +13,7 @@ import userObj from './User/user'
 import ProductList from './ProductList/Product'
 import products from './ProductList/products'
 
+import ToDoList from './TodoList/Todos'
 
 function App() {
 
@@ -40,6 +41,8 @@ function App() {
       <Usercard user={userObj} />
 
       <ProductList products={products} />
+
+      <ToDoList />
     </>
   )
 }
