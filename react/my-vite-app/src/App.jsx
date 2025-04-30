@@ -17,6 +17,9 @@ import ToDoList from './TodoList/Todos'
 import SimpleForm from './SimpleForm'
 import AdvanceForm from './AdvanceForm'
 
+
+import TemperatureComponent from './Temperature/Index'
+
 function App() {
 
   const fruits = ['apple', 'orange', 'melon'];
@@ -47,6 +50,8 @@ function App() {
       <ToDoList />
       <SimpleForm />
       <AdvanceForm />
+
+      <TemperatureComponent />
     </>
   )
 }
