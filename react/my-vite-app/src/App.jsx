@@ -14,6 +14,8 @@ import ProductList from './ProductList/Product'
 import products from './ProductList/products'
 
 import ToDoList from './TodoList/Todos'
+import SimpleForm from './SimpleForm'
+import AdvanceForm from './AdvanceForm'
 
 function App() {
 
@@ -43,6 +45,8 @@ function App() {
       <ProductList products={products} />
 
       <ToDoList />
+      <SimpleForm />
+      <AdvanceForm />
     </>
   )
 }
