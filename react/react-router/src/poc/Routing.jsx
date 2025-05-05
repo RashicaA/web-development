@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Routes, Route, Link, useParams } from 'react-router-dom';
+import { Routes, Route, Link, useParams, Navigate } from 'react-router-dom';
 
 function About() {
     return <h3>I am about page.</h3>
@@ -74,7 +74,14 @@ function Routing() {
                 <Route path='/about' element={<About />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/careers' element={<Careers />} />
+
+                {/* redirection of route.. */}
+                <Route path='/abc' element={<Navigate to='/home' />} />
+
+                {/* dynamic routing...  */}
                 <Route path='/users/:id' element={<Users />} />
+
+                {/* wildcard routing... */}
                 <Route path='*' element={<PageNotFound />} />
             </Routes>
         </>
