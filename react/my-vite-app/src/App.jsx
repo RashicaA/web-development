@@ -16,9 +16,9 @@ import products from './ProductList/products'
 import ToDoList from './TodoList/Todos'
 import SimpleForm from './SimpleForm'
 import AdvanceForm from './AdvanceForm'
-
-
 import TemperatureComponent from './Temperature/Index'
+import TitleUpdate from './TitleUpdate'
+
 
 function App() {
 
@@ -52,6 +52,7 @@ function App() {
       <AdvanceForm />
 
       <TemperatureComponent />
+      <TitleUpdate />
     </>
   )
 }
