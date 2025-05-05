@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useParams } from 'react-router-dom';
 
 function About() {
     return <h3>I am about page.</h3>
@@ -16,6 +16,38 @@ function Careers() {
 
 function PageNotFound() {
     return <h3>404 - Page not found. Please check URL.</h3>
+
+}
+
+function Users(props) {
+    let params = useParams();
+    const userId = params.id;
+    console.log("params", params);
+
+    let [user, setUser] = useState(null)
+
+    useEffect(() => {
+        (async function () {
+            try {
+                const resp = await fetch(`https://fakestoreapi.com/users/${userId}`);
+                const userData = await resp.json();
+                console.log(userData);
+                setUser(userData);
+            } catch (error) {
+
+            }
+
+        })()
+    }, [])
+
+
+    return <>
+        {user === null ? <h5>Loading...</h5>
+            : <><p>
+                Name: {user.name.firstname} {user.name.lastname}
+            </p>
+                <p> Phone: {user.phone}</p></>}
+    </>
 
 }
 
@@ -42,6 +74,7 @@ function Routing() {
                 <Route path='/about' element={<About />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/careers' element={<Careers />} />
+                <Route path='/users/:id' element={<Users />} />
                 <Route path='*' element={<PageNotFound />} />
             </Routes>
         </>
