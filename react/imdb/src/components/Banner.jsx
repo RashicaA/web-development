@@ -1,0 +1,17 @@
+import React from 'react'
+
+const Banner = () => {
+    return (
+        <div
+            className='h-[25vh] md:h-[75vh] bg-cover bg-center flex items-end'
+            style={{ backgroundImage: `url(https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68)` }}
+        >
+
+            <div className='text-white text-xl text-center w-full'>
+                Mission Impossible
+            </div>
+        </div>
+    )
+}
+
+export default Banner
