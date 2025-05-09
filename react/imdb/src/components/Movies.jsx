@@ -6,8 +6,8 @@ import axios from 'axios'
 const Movies = () => {
 
     const [movies, setMovies] = useState([])
-
     const [pageNo, setPageNo] = useState(1);
+    const [watchList, setWatchList] = useState([]);
 
     useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=e278e3c498ab14e0469bf6d86da17045&page=${pageNo}`)
@@ -34,6 +34,16 @@ const Movies = () => {
         setPageNo(pageNo + 1)
     }
 
+    function addToWatchlist(movieObj) {
+        console.log("addToWatchlist called with ", movieObj)
+        setWatchList([...watchList, movieObj]);
+    }
+
+    function removeFromWatchlist(movieObj) {
+        let filteredMovies = watchList.filter((movie) => movie.id !== movieObj.id)
+        setWatchList(filteredMovies);
+    }
+
     return (
         <div>
             <div className='text-2xl font-bold text-center m-4'>
@@ -41,7 +51,7 @@ const Movies = () => {
             </div>
             <div className='flex justify-around gap-8 flex-wrap'>
                 {movies.map((movieObj, i) => {
-                    return <MovieCard movieObj={movieObj} />
+                    return <MovieCard movieObj={movieObj} addToWatchlist={addToWatchlist} watchList={watchList} removeFromWatchlist={removeFromWatchlist} />
                 })}
             </div>
             <Pagination handleNext={handleNext} handlePrevious={handlePrevious} pageNo={pageNo} />
