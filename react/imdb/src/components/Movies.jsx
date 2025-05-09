@@ -24,6 +24,13 @@ const Movies = () => {
 
     }, [pageNo])
 
+    useEffect(() => {
+        const moviesFromLS = localStorage.getItem('movies');
+        if (moviesFromLS) {
+            setWatchList(JSON.parse(localStorage.getItem('movies')))
+        }
+    }, [])
+
     function handlePrevious() {
         if (pageNo > 1) {
             setPageNo(pageNo - 1)
@@ -36,12 +43,17 @@ const Movies = () => {
 
     function addToWatchlist(movieObj) {
         console.log("addToWatchlist called with ", movieObj)
-        setWatchList([...watchList, movieObj]);
+        const updatedWatchlist = [...watchList, movieObj];
+        setWatchList(updatedWatchlist);
+
+        localStorage.setItem('movies', JSON.stringify(updatedWatchlist))
     }
 
     function removeFromWatchlist(movieObj) {
         let filteredMovies = watchList.filter((movie) => movie.id !== movieObj.id)
         setWatchList(filteredMovies);
+        localStorage.setItem('movies', JSON.stringify(filteredMovies))
+
     }
 
     return (
