@@ -1,97 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import Pagination from './Pagination'
 import MovieCard from './MovieCard'
+import axios from 'axios'
 
 const Movies = () => {
 
-    const [movies, setMovies] = useState([
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-        {
-            url: "https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68",
-            title: "Dark Knight"
-        },
-    ])
+    const [movies, setMovies] = useState([])
 
-    const [pageNo, setPageNo] = useState(1)
+    const [pageNo, setPageNo] = useState(1);
+
+    useEffect(() => {
+        axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=e278e3c498ab14e0469bf6d86da17045&page=${pageNo}`)
+            .then(function (response) {
+                // handle success
+
+                setMovies(response.data.results)
+
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+
+    }, [pageNo])
 
     function handlePrevious() {
         if (pageNo > 1) {
