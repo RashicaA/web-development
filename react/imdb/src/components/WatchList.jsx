@@ -109,6 +109,11 @@ const WatchList = () => {
                                     Genre
                                 </div>
                             </div></th>
+                            <th className='font-medium text-gray-900'> <div className='flex'>
+                                <div>
+                                    Delete
+                                </div>
+                            </div></th>
                         </tr>
                     </thead>
                     <tbody className='border-t border-gray-600 divide-y divide-gray-200'>
@@ -134,6 +139,7 @@ const WatchList = () => {
                                         </td>
                                         <td className=' py-4' >{movie.popularity}</td>
                                         <td className=' py-4' >{getGenreFromGenreIds(movie.genre_ids)}</td>
+                                        <td className=' py-4 text-red-500' >Delete</td>
                                     </tr>
                                 )
                             })}

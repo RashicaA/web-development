@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Pagination from './Pagination'
 import MovieCard from './MovieCard'
 import axios from 'axios'
+
+import { WatchListContext } from '../context/WatchListContext';
 
 const Movies = () => {
 
     const [movies, setMovies] = useState([])
     const [pageNo, setPageNo] = useState(1);
-    const [watchList, setWatchList] = useState([]);
+    // const [watchList, setWatchList] = useState([]);
+    const { addToWatchlist, removeFromWatchlist, watchList, setWatchList } = useContext(WatchListContext)
 
     useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=e278e3c498ab14e0469bf6d86da17045&page=${pageNo}`)
@@ -41,20 +44,20 @@ const Movies = () => {
         setPageNo(pageNo + 1)
     }
 
-    function addToWatchlist(movieObj) {
-        console.log("addToWatchlist called with ", movieObj)
-        const updatedWatchlist = [...watchList, movieObj];
-        setWatchList(updatedWatchlist);
+    // function addToWatchlist(movieObj) {
+    //     console.log("addToWatchlist called with ", movieObj)
+    //     const updatedWatchlist = [...watchList, movieObj];
+    //     setWatchList(updatedWatchlist);
 
-        localStorage.setItem('movies', JSON.stringify(updatedWatchlist))
-    }
+    //     localStorage.setItem('movies', JSON.stringify(updatedWatchlist))
+    // }
 
-    function removeFromWatchlist(movieObj) {
-        let filteredMovies = watchList.filter((movie) => movie.id !== movieObj.id)
-        setWatchList(filteredMovies);
-        localStorage.setItem('movies', JSON.stringify(filteredMovies))
+    // function removeFromWatchlist(movieObj) {
+    //     let filteredMovies = watchList.filter((movie) => movie.id !== movieObj.id)
+    //     setWatchList(filteredMovies);
+    //     localStorage.setItem('movies', JSON.stringify(filteredMovies))
 
-    }
+    // }
 
     return (
         <div>
