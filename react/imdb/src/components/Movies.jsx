@@ -4,12 +4,17 @@ import MovieCard from './MovieCard'
 import axios from 'axios'
 
 import { WatchListContext } from '../context/WatchListContext';
+import { useSelector, useDispatch } from "react-redux"
+import paginationSlice from '../redux/paginationSlice';
 
 const Movies = () => {
-
     const [movies, setMovies] = useState([])
-    const [pageNo, setPageNo] = useState(1);
-    // const [watchList, setWatchList] = useState([]);
+    // const pageNo = useSelector((state) => state.PaginationSlice.pageNo)
+    // same as above
+    const { pageNo } = useSelector((state) => state.PaginationSlice)
+
+    const dispatch = useDispatch()
+
     const { addToWatchlist, removeFromWatchlist, watchList, setWatchList } = useContext(WatchListContext)
 
     useEffect(() => {
@@ -36,28 +41,13 @@ const Movies = () => {
 
     function handlePrevious() {
         if (pageNo > 1) {
-            setPageNo(pageNo - 1)
+            dispatch(paginationSlice.actions.handlePrevious())
         }
     }
 
     function handleNext() {
-        setPageNo(pageNo + 1)
+        dispatch(paginationSlice.actions.handleNext())
     }
-
-    // function addToWatchlist(movieObj) {
-    //     console.log("addToWatchlist called with ", movieObj)
-    //     const updatedWatchlist = [...watchList, movieObj];
-    //     setWatchList(updatedWatchlist);
-
-    //     localStorage.setItem('movies', JSON.stringify(updatedWatchlist))
-    // }
-
-    // function removeFromWatchlist(movieObj) {
-    //     let filteredMovies = watchList.filter((movie) => movie.id !== movieObj.id)
-    //     setWatchList(filteredMovies);
-    //     localStorage.setItem('movies', JSON.stringify(filteredMovies))
-
-    // }
 
     return (
         <div>
