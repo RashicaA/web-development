@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter button tests snapshot for counter 1`] = `
+<DocumentFragment>
+  <h4>
+    Count: 0
+  </h4>
+  <button
+    data-testid="increment"
+  >
+    Increment
+  </button>
+  <button
+    data-testid="decrement"
+  >
+    Decrement
+  </button>
+  <button
+    data-testid="reset"
+  >
+    Reset
+  </button>
+</DocumentFragment>
+`;

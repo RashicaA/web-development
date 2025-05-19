@@ -29,32 +29,33 @@ function App() {
   }
 
   console.log(userObj)
-  return (
-    <>
-      <div>
-        <HelloComponent name='John' age='20' />
-        <HelloComponent name="Alice" />
+  return <Counter />
+  // return (
+  //   <>
+  //     <div>
+  //       <HelloComponent name='John' age='20' />
+  //       <HelloComponent name="Alice" />
 
 
-      </div>
-      <div>
-        <DisplayData fruits={fruits} person={person} />
-      </div>
-      <Button />
+  //     </div>
+  //     <div>
+  //       <DisplayData fruits={fruits} person={person} />
+  //     </div>
+  //     <Button />
 
-      <Counter />
-      <Usercard user={userObj} />
+  //     <Counter />
+  //     <Usercard user={userObj} />
 
-      <ProductList products={products} />
+  //     <ProductList products={products} />
 
-      <ToDoList />
-      <SimpleForm />
-      <AdvanceForm />
+  //     <ToDoList />
+  //     <SimpleForm />
+  //     <AdvanceForm />
 
-      <TemperatureComponent />
-      <TitleUpdate />
-    </>
-  )
+  //     <TemperatureComponent />
+  //     <TitleUpdate />
+  //   </>
+  // )
 }
 
 export default App
