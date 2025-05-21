@@ -3,56 +3,37 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
+
+const Home = lazy(() => import('./components/Home'))
+const About = lazy(() => import('./components/About'))
+const Contact = lazy(() => import('./components/Contact'))
 
 function App() {
-
-  const [Home, setHome] = useState(null);
-  const [About, setAbout] = useState(null);
-  const [Contact, setContact] = useState(null);
-
-  useEffect(() => {
-    // Preload the home page...
-    import('./components/Home').then(module => setHome(() => module.default))
-
-  }, [])
-
-  const loadHomePage = () => {
-    import('./components/Home').then(module => setHome(() => module.default))
-  }
-
-  const loadAboutPage = () => {
-    import('./components/About').then(module => setAbout(() => module.default))
-  }
-
-  const loadContactPage = () => {
-    import('./components/Contact').then(module => setContact(() => module.default))
-  }
-
-
   return (
-
     <BrowserRouter>
       <div>
         <nav>
           <ul>
-            <Link to={'/'} onClick={loadHomePage}>
+            <Link to={'/'} >
               <li>Home</li>
             </Link>
-            <Link to={'/about'} onClick={loadAboutPage}>
+            <Link to={'/about'} >
               <li>About</li>
             </Link>
-            <Link to={'/contact'} onClick={loadContactPage}>
+            <Link to={'/contact'} >
 
               <li>Contact</li>
             </Link>
           </ul>
         </nav>
-        <Routes>
-          <Route path='/' element={Home ? <Home /> : <div>Loading...</div>} />
-          <Route path='/about' element={About ? <About /> : <div>Loading...</div>} />
-          <Route path='/contact' element={Contact ? <Contact /> : <div>Loading...</div>} />
-        </Routes>
+        <Suspense fallback={<div>Loading....</div>}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/contact' element={<Contact />} />
+          </Routes>
+        </Suspense>
       </div>
     </BrowserRouter>
   );
