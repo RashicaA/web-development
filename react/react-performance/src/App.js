@@ -5,9 +5,13 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import { useState, useEffect, lazy, Suspense } from 'react';
 
+import LargeArraySum from './components/LargeArraySum';
+
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
 const Contact = lazy(() => import('./components/Contact'))
+
+
 
 function App() {
   return (
@@ -34,6 +38,7 @@ function App() {
             <Route path='/contact' element={<Contact />} />
           </Routes>
         </Suspense>
+        <LargeArraySum />
       </div>
     </BrowserRouter>
   );
