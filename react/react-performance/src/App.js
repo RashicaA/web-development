@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useState, useEffect, lazy, Suspense } from 'react';
 
 import LargeArraySum from './components/LargeArraySum';
+import ItemCallback from './components/ItemCallback';
 
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
@@ -39,6 +40,7 @@ function App() {
           </Routes>
         </Suspense>
         <LargeArraySum />
+        <ItemCallback />
       </div>
     </BrowserRouter>
   );
