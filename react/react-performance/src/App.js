@@ -18,7 +18,7 @@ const Contact = lazy(() => import('./components/Contact'))
 function App() {
   return (
     <>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <div>
           <nav>
             <ul>
@@ -43,10 +43,10 @@ function App() {
           </Suspense>
           <LargeArraySum />
           <ItemCallback />
-          <UseRefExample /> */}
-      <UseRefExampleTimer />
-      {/* </div>
-      </BrowserRouter> */}
+          <UseRefExample />
+          <UseRefExampleTimer />
+        </div>
+      </BrowserRouter>
     </>
   );
 }
