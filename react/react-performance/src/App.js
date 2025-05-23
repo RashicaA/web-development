@@ -11,6 +11,8 @@ import UseRefExample from './components/UseRefExample';
 import UseRefExampleTimer from './components/UseRefExample2';
 import Stopwatch from './components/Stopwatch'
 
+import Carousel from './components/Carousel';
+
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
 const Contact = lazy(() => import('./components/Contact'))
@@ -47,6 +49,7 @@ function App() {
           <UseRefExample />
           <UseRefExampleTimer />
           <Stopwatch />
+          <Carousel />
         </div>
       </BrowserRouter>
     </>
