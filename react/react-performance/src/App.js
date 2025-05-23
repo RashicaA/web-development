@@ -9,6 +9,7 @@ import LargeArraySum from './components/LargeArraySum';
 import ItemCallback from './components/ItemCallback';
 import UseRefExample from './components/UseRefExample';
 import UseRefExampleTimer from './components/UseRefExample2';
+import Stopwatch from './components/Stopwatch'
 
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
@@ -45,6 +46,7 @@ function App() {
           <ItemCallback />
           <UseRefExample />
           <UseRefExampleTimer />
+          <Stopwatch />
         </div>
       </BrowserRouter>
     </>
