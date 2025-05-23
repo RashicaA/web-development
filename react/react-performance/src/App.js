@@ -13,12 +13,21 @@ import Stopwatch from './components/Stopwatch'
 
 import Carousel from './components/Carousel';
 
+import Modal from './components/Modal'
+
+import useVisible from './components/UseVisible'
+
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
 const Contact = lazy(() => import('./components/Contact'))
 
 
 function App() {
+
+  const { isVisible, show, hide, toggle } = useVisible(false)
+
+
+
   return (
     <>
       <BrowserRouter>
@@ -50,6 +59,14 @@ function App() {
           <UseRefExampleTimer />
           <Stopwatch />
           <Carousel />
+        </div>
+        <div style={{ margin: '20px' }}>
+          <h1>Custom hook example</h1>
+          <button onClick={show}>Show modal</button>
+          <button onClick={hide}>Hide modal</button>
+          <button onClick={toggle}>Toggle modal</button>
+          <Modal isVisible={isVisible} hide={hide} />
+
         </div>
       </BrowserRouter>
     </>
