@@ -20,6 +20,7 @@ import useVisible from './components/UseVisible'
 import WelcomeClass from './components/WelcomeClassComponent';
 import WelcomeFucntional from './components/WelcomeFunctional';
 import Todo from './components/TodoClass';
+import TodoFunctional from './components/TodoFunctional';
 
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
@@ -77,6 +78,7 @@ function App() {
         <WelcomeClass name="ClassBased part 2" />
         <WelcomeFucntional name="FunctionalBased" />
         <Todo />
+        <TodoFunctional />
       </BrowserRouter>
     </>
   );

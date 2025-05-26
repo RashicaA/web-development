@@ -2,19 +2,24 @@ import React from 'react'
 
 class TodoClass extends React.Component {
     constructor(props) {
+        console.log("[constructor]")
         super(props);
         this.state = {
-            todos: ["Walk"],
+            todos: [],
             newTodo: ''
         }
     }
 
     componentDidMount() {
-        console.log("[componentDidMount] called")
+        console.log("[componentDidMount] called");
+        // simulate an api...
+        setTimeout(() => {
+            this.setState({ todos: ["Code"] })
+        }, 1000)
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("componentDidUpdate")
+        console.log("[componentDidUpdate]")
         // console.log({ prevProps, prevState })
         // console.log({ props: this.props, state: this.state })
         if (prevState.todos !== this.state.todos) {
@@ -23,7 +28,7 @@ class TodoClass extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log("componentWillUnmount")
+        console.log("[componentWillUnmount]")
     }
 
     handleChange = (ev) => {
@@ -37,6 +42,7 @@ class TodoClass extends React.Component {
     }
 
     render() {
+        console.log('[render] called')
         return <>
             <h1>Todos</h1>
             <input type='text' placeholder='Enter todo...'
