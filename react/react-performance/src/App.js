@@ -22,66 +22,78 @@ import WelcomeFucntional from './components/WelcomeFunctional';
 import Todo from './components/TodoClass';
 import TodoFunctional from './components/TodoFunctional';
 
+// for hoc code
+import DataComponent from './components/Data';
+import withLoading from './components/HOC';
+
+
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
 const Contact = lazy(() => import('./components/Contact'))
 
 
+const EnhancedComp = withLoading(DataComponent);
+
 function App() {
 
   const { isVisible, show, hide, toggle } = useVisible(false)
 
+  return <div>
+    <EnhancedComp data={"I am useful data..."} />
+  </div>
 
 
-  return (
-    <>
-      <BrowserRouter>
-        <div>
-          <nav>
-            <ul>
-              <Link to={'/'} >
-                <li>Home</li>
-              </Link>
-              <Link to={'/about'} >
-                <li>About</li>
-              </Link>
-              <Link to={'/contact'} >
 
-                <li>Contact</li>
-              </Link>
-            </ul>
-          </nav>
-          <Suspense fallback={<div>Loading....</div>}>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/about' element={<About />} />
-              <Route path='/contact' element={<Contact />} />
-            </Routes>
-          </Suspense>
-          <LargeArraySum />
-          <ItemCallback />
-          <UseRefExample />
-          <UseRefExampleTimer />
-          <Stopwatch />
-          <Carousel />
-        </div>
-        <div style={{ margin: '20px' }}>
-          <h1>Custom hook example</h1>
-          <button onClick={show}>Show modal</button>
-          <button onClick={hide}>Hide modal</button>
-          <button onClick={toggle}>Toggle modal</button>
-          <Modal isVisible={isVisible} hide={hide} />
 
-        </div>
+  // return (
+  //   <>
+  //     <BrowserRouter>
+  //       <div>
+  //         <nav>
+  //           <ul>
+  //             <Link to={'/'} >
+  //               <li>Home</li>
+  //             </Link>
+  //             <Link to={'/about'} >
+  //               <li>About</li>
+  //             </Link>
+  //             <Link to={'/contact'} >
 
-        <WelcomeClass name="ClassBased" />
-        <WelcomeClass name="ClassBased part 2" />
-        <WelcomeFucntional name="FunctionalBased" />
-        <Todo />
-        <TodoFunctional />
-      </BrowserRouter>
-    </>
-  );
+  //               <li>Contact</li>
+  //             </Link>
+  //           </ul>
+  //         </nav>
+  //         <Suspense fallback={<div>Loading....</div>}>
+  //           <Routes>
+  //             <Route path='/' element={<Home />} />
+  //             <Route path='/about' element={<About />} />
+  //             <Route path='/contact' element={<Contact />} />
+  //           </Routes>
+  //         </Suspense>
+  //         <LargeArraySum />
+  //         <ItemCallback />
+  //         <UseRefExample />
+  //         <UseRefExampleTimer />
+  //         <Stopwatch />
+  //         <Carousel />
+  //       </div>
+  //       <div style={{ margin: '20px' }}>
+  //         <h1>Custom hook example</h1>
+  //         <button onClick={show}>Show modal</button>
+  //         <button onClick={hide}>Hide modal</button>
+  //         <button onClick={toggle}>Toggle modal</button>
+  //         <Modal isVisible={isVisible} hide={hide} />
+
+  //       </div>
+
+  //       <WelcomeClass name="ClassBased" />
+  //       <WelcomeClass name="ClassBased part 2" />
+  //       <WelcomeFucntional name="FunctionalBased" />
+  //       <Todo />
+  //       <TodoFunctional />
+  //     </BrowserRouter>
+  //   </>
+  // );
 }
 
 export default App;
