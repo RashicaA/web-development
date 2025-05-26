@@ -17,6 +17,10 @@ import Modal from './components/Modal'
 
 import useVisible from './components/UseVisible'
 
+import WelcomeClass from './components/WelcomeClassComponent';
+import WelcomeFucntional from './components/WelcomeFunctional';
+import Todo from './components/TodoClass';
+
 const Home = lazy(() => import('./components/Home'))
 const About = lazy(() => import('./components/About'))
 const Contact = lazy(() => import('./components/Contact'))
@@ -68,6 +72,11 @@ function App() {
           <Modal isVisible={isVisible} hide={hide} />
 
         </div>
+
+        <WelcomeClass name="ClassBased" />
+        <WelcomeClass name="ClassBased part 2" />
+        <WelcomeFucntional name="FunctionalBased" />
+        <Todo />
       </BrowserRouter>
     </>
   );
